@@ -10,14 +10,23 @@ include("$_SERVER[DOCUMENT_ROOT]/vendor/autoload.php");
 // Set config params to acces Google API
  $client_id = $google_client_id;
  $client_secret = $google_client_secret;
- $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'];
+ if(getenv('GOOGLE_CLIENT_ID') !== false){
+  $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'];
+ }
+ else{
+  $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'];
+ }
+ 
+//  echo filter_var($redirect_uri, FILTER_SANITIZE_URL);
+
  
 //Create and Request to access Google API
 $client = new Google_Client();
 $client->setApplicationName("Google OAuth Login With PHP");
 $client->setClientId($client_id);
 $client->setClientSecret($client_secret);
-$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] );
+// $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] );
+$client->setRedirectUri($redirect_uri );
 $client->addScope(Google_Service_Oauth2::USERINFO_PROFILE);
 $client->addScope("https://www.googleapis.com/auth/userinfo.email"); 
 $objRes = new Google_Service_Oauth2($client);
