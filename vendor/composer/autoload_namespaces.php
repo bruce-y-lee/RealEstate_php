@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Jenssegers\\Mongodb' => array($vendorDir . '/jenssegers/mongodb/src'),
+    'Google_Service_' => array($vendorDir . '/google/apiclient-services/src'),
+    'Google_' => array($vendorDir . '/google/apiclient/src'),
 );

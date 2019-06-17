@@ -39,6 +39,11 @@
     <![endif]-->
 
   </head>
+  <?php 
+    include 'modals.php';
+    // include 'api/google_oauth.php';
+    // echo "php works?";
+  ?>
   <body class="aa-price-range">  
   <!-- Pre Loader -->
   <div id="aa-preloader-area">
@@ -61,10 +66,16 @@
                 </div>              
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
+                <?php if(isset($googleAuthUrl)):?>
                 <div class="aa-header-right">
-                  <a href="register.html" class="aa-register">Register</a>
-                  <a href="signin.html" class="aa-login">Login</a>
+                  <a  href="register.html" class="aa-register">Register</a>
+                  <a data-toggle="modal" data-target="#loginModal" href="#" class="aa-login">Login</a>
                 </div>
+                <?php else:?>
+                <div class="aa-header-right">
+                  <a  href="#" class="aa-login">My List</a>
+                </div>
+                <?php endif ?>
               </div>
             </div>
           </div>
@@ -73,6 +84,9 @@
     </div>
   </header>
   <!-- End header section -->
+
+
+
 
   <!-- Start menu section -->
   <section id="aa-menu-area">
@@ -112,6 +126,11 @@
             </li>
             <li><a href="contact.html">CONTACT</a></li>
            <li><a href="404.html">404 PAGE</a></li>
+           <?php if (!isset($googleAuthUrl)): ?>
+           <li><a href="#"><?php echo $userData->givenName;?></a></li>
+           <li><a href="?logout">Log Out</a></li>
+           
+           <?php endif ?>
           </ul>                            
         </div><!--/.nav-collapse -->       
       </div>          
@@ -126,7 +145,7 @@
       <div class="aa-top-slider">
         <!-- Top slider single slide -->
         <div class="aa-top-slider-single">
-          <img src="img/slider/3.jpg" alt="img">
+          <img src="img/slider/2.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
             <span class="aa-top-slider-catg">Duplex</span>
@@ -141,7 +160,7 @@
         <!-- / Top slider single slide -->
         <!-- Top slider single slide -->
         <div class="aa-top-slider-single">
-          <img src="img/slider/2.jpg" alt="img">
+          <img src="img/slider/3.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
             <span class="aa-top-slider-catg">Duplex</span>

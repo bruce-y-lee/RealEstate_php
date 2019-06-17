@@ -1,5 +1,6 @@
 {
     "require": {
-        "jenssegers/mongodb": "^3.5"
+        "jenssegers/mongodb": "^3.5",
+        "google/apiclient": "^2.0"
     }
 }
