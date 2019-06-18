@@ -1,5 +1,7 @@
 <?php 
     include("$_SERVER[DOCUMENT_ROOT]/api/auth/google_oauth.php");
+    include("$_SERVER[DOCUMENT_ROOT]/api/auth/facebook_oauth.php");
+    include("$_SERVER[DOCUMENT_ROOT]/api/auth/logout.php");
 ?>
 
 <!-- LOGIN Modal -->
@@ -43,8 +45,17 @@
 	  Login with Google
 		</button>
         </form>
+        
         <?php elsif: ?>
         <?php endif ?>
+        <br/>
+        <br/>
+        <form action="<?php echo $loginUrl; ?>" method="post">
+        
+            <button type="submit" class="btn btn-primary btn-block">
+	            Login with FaceBook
+		    </button>
+        </form>
       </div>
     </div>
 

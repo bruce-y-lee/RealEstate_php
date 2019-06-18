@@ -103,4 +103,9 @@
         var_dump($b);
         foo($b);
         var_dump($b);
+        echo "<br/>";
+        // echo $_SESSION['SERVER_NAME'];
+        // echo $_SERVER['SERVER_NAME'];
+        echo "<br/>";
+        echo $_SERVER['HTTP_HOST']
 ?>

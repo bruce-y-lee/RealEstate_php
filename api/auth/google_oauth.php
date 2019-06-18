@@ -10,6 +10,8 @@ include("$_SERVER[DOCUMENT_ROOT]/vendor/autoload.php");
 // Set config params to acces Google API
  $client_id = $google_client_id;
  $client_secret = $google_client_secret;
+
+ //if production mode redirect uri start with https else http
  if(getenv('GOOGLE_CLIENT_ID') !== false){
   $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'];
  }
@@ -17,7 +19,7 @@ include("$_SERVER[DOCUMENT_ROOT]/vendor/autoload.php");
   $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'];
  }
  
-//  echo filter_var($redirect_uri, FILTER_SANITIZE_URL);
+
 
  
 //Create and Request to access Google API
@@ -48,20 +50,15 @@ if ($client->getAccessToken()) {
   $userData = $objRes->userinfo->get();
   if(!empty($userData)) {
   //insert data into database
-  // var_dump($userData->givenName);
+  
+  //store id to session to verify logged or not
+  $_SESSION['user_id'] = $userData->id;
   }
+  
   $_SESSION['access_token'] = $client->getAccessToken();
 } else {
   $googleAuthUrl  =  $client->createAuthUrl();
 }
 
-// var_dump($_SESSION['access_token']);
-// var_dump($userData);
-//logout
-// unset($_SESSION['access_token']);
-if (isset($_REQUEST['logout'])) {
-  unset($_SESSION['access_token']);
-  $client->revokeToken();
-  header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL)); //redirect user back to page
-}
+
 ?>
